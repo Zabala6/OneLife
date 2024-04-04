@@ -139,8 +139,8 @@ char initDone = false;
 
 float mouseSpeed;
 
-int musicOff = false;
-float musicLoudness;
+int editorSoundOff = false;
+float editorSoundLoudness;
 
 int webRetrySeconds;
 
@@ -270,11 +270,11 @@ static int stepsBetweenDeleteRepeat;
 
 
 static const char *customDataFormatWriteString = 
-    "version%d_mouseSpeed%f_musicOff%d_musicLoudness%f"
+    "version%d_mouseSpeed%f_editorSoundOff%d_editorSoundLoudness%f"
     "_webRetrySeconds%d";
 
 static const char *customDataFormatReadString = 
-    "version%d_mouseSpeed%f_musicOff%d_musicLoudness%f"
+    "version%d_mouseSpeed%f_editorSoundOff%d_editorSoundLoudness%f"
     "_webRetrySeconds%d";
 
 
@@ -282,18 +282,18 @@ char *getCustomRecordedGameData() {
     
     float mouseSpeedSetting = 
         SettingsManager::getFloatSetting( "mouseSpeed", 1.0f );
-    int musicOffSetting = 
-        SettingsManager::getIntSetting( "musicOff", 0 );
-    float musicLoudnessSetting = 
-        SettingsManager::getFloatSetting( "musicLoudness", 1.0f );
+    int editorSoundOffSetting = 
+        SettingsManager::getIntSetting( "editorSoundOff", 0 );
+    float editorSoundLoudnessSetting = 
+        SettingsManager::getFloatSetting( "editorSoundLoudness", 1.0f );
     int webRetrySecondsSetting = 
         SettingsManager::getIntSetting( "webRetrySeconds", 10 );
     
 
     char * result = autoSprintf(
         customDataFormatWriteString,
-        versionNumber, mouseSpeedSetting, musicOffSetting, 
-        musicLoudnessSetting,
+        versionNumber, mouseSpeedSetting, editorSoundOffSetting, 
+        editorSoundLoudnessSetting,
         webRetrySecondsSetting );
     
 
@@ -447,8 +447,8 @@ void initFrameDrawer( int inWidth, int inHeight, int inTargetFrameRate,
 
     float mouseSpeedSetting = 1.0f;
     
-    int musicOffSetting = 0;
-    float musicLoudnessSetting = 1.0f;
+    int editorSoundOffSetting = 0;
+    float editorSoundLoudnessSetting = 1.0f;
     int webRetrySecondsSetting = 10;
 
     
@@ -458,8 +458,8 @@ void initFrameDrawer( int inWidth, int inHeight, int inTargetFrameRate,
                           customDataFormatReadString, 
                           &readVersionNumber,
                           &mouseSpeedSetting, 
-                          &musicOffSetting,
-                          &musicLoudnessSetting,
+                          &editorSoundOffSetting,
+                          &editorSoundLoudnessSetting,
                           &webRetrySecondsSetting );
     if( numRead != 5 ) {
         // no recorded game?
@@ -484,8 +484,8 @@ void initFrameDrawer( int inWidth, int inHeight, int inTargetFrameRate,
 
     mouseSpeed = mouseParam * inWidth / viewWidth;
 
-    musicOff = musicOffSetting;
-    musicLoudness = musicLoudnessSetting;
+    editorSoundOff = editorSoundOffSetting;
+    editorSoundLoudness = editorSoundLoudnessSetting;
     webRetrySeconds = webRetrySecondsSetting;
 
     
@@ -518,7 +518,7 @@ void initFrameDrawer( int inWidth, int inHeight, int inTargetFrameRate,
 
 
 
-    setSoundLoudness( musicLoudness );
+    setSoundLoudness( editorSoundLoudness );
     setSoundPlaying( true );
     //setSoundSpriteRateRange( 0.95, 1.05 );
     setSoundSpriteVolumeRange( 0.60, 1.0 );
@@ -1712,7 +1712,7 @@ void specialKeyUp( int inKey ) {
 
 char getUsesSound() {
     
-    return ! musicOff;
+    return ! editorSoundOff;
     }
 
 
