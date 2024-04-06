@@ -5957,6 +5957,296 @@ extern char leftKey;
 extern char downKey;
 extern char rightKey;
 
+void EditorObjectPage::moveSpriteLayerUp( int inOffset ){
+    int offset = inOffset;
+
+    for( int o=0; o<offset; o++ ) {
+                    
+        int layerOffset = 1;
+        if( mPickedObjectLayer + 1 
+            >= mCurrentObject.numSprites ) {
+        
+            layerOffset = 
+                mCurrentObject.numSprites - 1 - mPickedObjectLayer;
+            }
+        if( mPickedObjectLayer < 
+            mCurrentObject.numSprites - layerOffset ) {
+
+
+            // two indices being swapped
+            int indexA = mPickedObjectLayer;
+            int indexB = mPickedObjectLayer + layerOffset;
+            
+            LayerSwapRecord swap = { indexA, indexB };
+            
+            mObjectLayerSwaps.push_back( swap );
+            
+
+            int tempSprite = 
+                mCurrentObject.sprites[mPickedObjectLayer + 
+                                        layerOffset];
+            doublePair tempPos = 
+                mCurrentObject.spritePos[mPickedObjectLayer + 
+                                            layerOffset];
+            double tempRot = 
+                mCurrentObject.spriteRot[mPickedObjectLayer + 
+                                            layerOffset];
+            char tempHFlip = 
+                mCurrentObject.spriteHFlip[mPickedObjectLayer + 
+                                            layerOffset];
+
+            FloatRGB tempColor = 
+                mCurrentObject.spriteColor[mPickedObjectLayer + 
+                                            layerOffset];
+
+            double tempAgeStart = 
+                mCurrentObject.spriteAgeStart[mPickedObjectLayer + 
+                                                layerOffset];
+            double tempAgeEnd = 
+                mCurrentObject.spriteAgeEnd[mPickedObjectLayer + 
+                                            layerOffset];
+            int tempParent = 
+                mCurrentObject.spriteParent[mPickedObjectLayer + 
+                                            layerOffset];
+        
+            char tempInvisibleWhenHolding = 
+                mCurrentObject.spriteInvisibleWhenHolding[
+                    mPickedObjectLayer + 
+                    layerOffset];
+
+            int tempInvisibleWhenWorn = 
+                mCurrentObject.spriteInvisibleWhenWorn[
+                    mPickedObjectLayer + 
+                    layerOffset];
+            int tempInvisibleWhenContained = 
+                mCurrentObject.spriteInvisibleWhenContained[
+                    mPickedObjectLayer + 
+                    layerOffset];
+            int tempIgnoredWhenCalculatingCenterOffset = 
+                mCurrentObject.spriteIgnoredWhenCalculatingCenterOffset[
+                    mPickedObjectLayer + 
+                    layerOffset];
+            char tempBehindSlots = 
+                mCurrentObject.spriteBehindSlots[
+                    mPickedObjectLayer + 
+                    layerOffset];
+            char tempBehindPlayer = 
+                mCurrentObject.spriteBehindPlayer[
+                    mPickedObjectLayer + 
+                    layerOffset];
+            char tempAdditiveBlend = 
+                mCurrentObject.spriteAdditiveBlend[
+                    mPickedObjectLayer + 
+                    layerOffset];
+
+            char tempIsHead = 
+                mCurrentObject.spriteIsHead[
+                    mPickedObjectLayer + 
+                    layerOffset];
+            char tempIsBody = 
+                mCurrentObject.spriteIsBody[
+                    mPickedObjectLayer + 
+                    layerOffset];
+            char tempIsBackFoot = 
+                mCurrentObject.spriteIsBackFoot[
+                    mPickedObjectLayer + 
+                    layerOffset];
+            char tempIsFrontFoot = 
+                mCurrentObject.spriteIsFrontFoot[
+                    mPickedObjectLayer + 
+                    layerOffset];
+
+            char tempUseVanish = 
+                mCurrentObject.spriteUseVanish[
+                    mPickedObjectLayer + 
+                    layerOffset];
+            char tempUseAppear = 
+                mCurrentObject.spriteUseAppear[
+                    mPickedObjectLayer + 
+                    layerOffset];
+
+
+            mCurrentObject.sprites[mPickedObjectLayer + 
+                                    layerOffset]
+                = mCurrentObject.sprites[mPickedObjectLayer];
+
+            mCurrentObject.sprites[mPickedObjectLayer] = 
+                tempSprite;
+
+            mCurrentObject.spritePos[mPickedObjectLayer + 
+                                        layerOffset]
+                = mCurrentObject.spritePos[mPickedObjectLayer];
+
+            mCurrentObject.spritePos[mPickedObjectLayer] = tempPos;
+
+            mCurrentObject.spriteRot[mPickedObjectLayer + 
+                                        layerOffset]
+                = mCurrentObject.spriteRot[mPickedObjectLayer];
+
+            mCurrentObject.spriteRot[mPickedObjectLayer] = tempRot;
+
+            mCurrentObject.spriteHFlip[mPickedObjectLayer 
+                                        + layerOffset]
+                = mCurrentObject.spriteHFlip[mPickedObjectLayer];
+            
+            mCurrentObject.spriteHFlip[mPickedObjectLayer] = 
+                tempHFlip;
+
+            mCurrentObject.spriteColor[mPickedObjectLayer 
+                                        + layerOffset]
+                = mCurrentObject.spriteColor[mPickedObjectLayer];
+            
+            mCurrentObject.spriteColor[mPickedObjectLayer] = 
+                tempColor;
+
+
+            mCurrentObject.spriteAgeStart[mPickedObjectLayer 
+                                            + layerOffset]
+                = mCurrentObject.spriteAgeStart[
+                    mPickedObjectLayer];
+            
+            mCurrentObject.spriteAgeStart[mPickedObjectLayer] = 
+                tempAgeStart;
+
+            mCurrentObject.spriteAgeEnd[mPickedObjectLayer 
+                                        + layerOffset]
+                = mCurrentObject.spriteAgeEnd[mPickedObjectLayer];
+            mCurrentObject.spriteAgeEnd[mPickedObjectLayer] = 
+                tempAgeEnd;
+        
+            mCurrentObject.spriteParent[mPickedObjectLayer 
+                                        + layerOffset]
+                = mCurrentObject.spriteParent[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteParent[mPickedObjectLayer] = 
+                tempParent;
+
+
+            mCurrentObject.spriteInvisibleWhenHolding[
+                mPickedObjectLayer 
+                + layerOffset]
+                = mCurrentObject.spriteInvisibleWhenHolding[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteInvisibleWhenHolding[
+                mPickedObjectLayer] = tempInvisibleWhenHolding;
+
+            mCurrentObject.spriteInvisibleWhenWorn[
+                mPickedObjectLayer 
+                + layerOffset]
+                = mCurrentObject.spriteInvisibleWhenWorn[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteInvisibleWhenWorn[
+                mPickedObjectLayer] = tempInvisibleWhenWorn;
+
+            mCurrentObject.spriteInvisibleWhenContained[
+                mPickedObjectLayer 
+                + layerOffset]
+                = mCurrentObject.spriteInvisibleWhenContained[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteInvisibleWhenContained[
+                mPickedObjectLayer] = tempInvisibleWhenContained;
+
+            mCurrentObject.spriteIgnoredWhenCalculatingCenterOffset[
+                mPickedObjectLayer 
+                + layerOffset]
+                = mCurrentObject.spriteIgnoredWhenCalculatingCenterOffset[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteIgnoredWhenCalculatingCenterOffset[
+                mPickedObjectLayer] = tempIgnoredWhenCalculatingCenterOffset;
+
+            mCurrentObject.spriteBehindSlots[
+                mPickedObjectLayer 
+                + layerOffset]
+                = mCurrentObject.spriteBehindSlots[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteBehindSlots[
+                mPickedObjectLayer] = tempBehindSlots;
+
+            mCurrentObject.spriteBehindPlayer[
+                mPickedObjectLayer 
+                + layerOffset]
+                = mCurrentObject.spriteBehindPlayer[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteBehindPlayer[
+                mPickedObjectLayer] = tempBehindPlayer;
+
+
+            mCurrentObject.spriteAdditiveBlend[
+                mPickedObjectLayer 
+                + layerOffset]
+                = mCurrentObject.spriteAdditiveBlend[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteAdditiveBlend[
+                mPickedObjectLayer] = tempAdditiveBlend;
+
+
+            mCurrentObject.spriteIsHead[ mPickedObjectLayer 
+                                        + layerOffset ] =
+                mCurrentObject.spriteIsHead[mPickedObjectLayer];
+            mCurrentObject.spriteIsHead[mPickedObjectLayer] = 
+                tempIsHead;
+
+            mCurrentObject.spriteIsBody[ mPickedObjectLayer 
+                                        + layerOffset ] =
+                mCurrentObject.spriteIsBody[mPickedObjectLayer];
+            mCurrentObject.spriteIsBody[mPickedObjectLayer] = 
+                tempIsBody;
+
+            mCurrentObject.spriteIsBackFoot[ mPickedObjectLayer 
+                                        + layerOffset ] =
+                mCurrentObject.spriteIsBackFoot[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteIsBackFoot[mPickedObjectLayer] = 
+                tempIsBackFoot;
+
+            mCurrentObject.spriteIsFrontFoot[ mPickedObjectLayer 
+                                        + layerOffset ] =
+                mCurrentObject.spriteIsFrontFoot[
+                    mPickedObjectLayer];
+            mCurrentObject.spriteIsFrontFoot[mPickedObjectLayer] = 
+                tempIsFrontFoot;
+
+
+
+            mCurrentObject.spriteUseVanish[ mPickedObjectLayer 
+                                            + layerOffset ] =
+                mCurrentObject.spriteUseVanish[mPickedObjectLayer];
+            mCurrentObject.spriteUseVanish[mPickedObjectLayer] = 
+                tempUseVanish;
+
+            mCurrentObject.spriteUseAppear[ mPickedObjectLayer 
+                                            + layerOffset ] =
+                mCurrentObject.spriteUseAppear[mPickedObjectLayer];
+            mCurrentObject.spriteUseAppear[mPickedObjectLayer] = 
+                tempUseAppear;
+
+        
+            mPickedObjectLayer += layerOffset;
+        
+            // any children pointing to index A must now
+            // point to B and vice-versa
+            for( int i=0; i<mCurrentObject.numSprites; i++ ) {
+                if( mCurrentObject.spriteParent[i] == indexA ) {
+                    mCurrentObject.spriteParent[i] = indexB;
+                    }
+                else if( mCurrentObject.spriteParent[i] == 
+                            indexB ) {
+                    
+                    mCurrentObject.spriteParent[i] = indexA;
+                    }
+                }
+            for( int i=0; i<mCurrentObject.numSlots; i++ ) {
+                if( mCurrentObject.slotParent[i] == indexA ) {
+                    mCurrentObject.slotParent[i] = indexB;
+                }
+                else if( mCurrentObject.slotParent[i] == indexB ) {
+                    mCurrentObject.slotParent[i] = indexA;
+                }
+            }
+        }
+    }
+}
+
 void EditorObjectPage::moveSpriteLayerDown( int inOffset ) {
     int offset = inOffset;
     
@@ -6956,291 +7246,7 @@ void EditorObjectPage::specialKeyDown( int inKeyCode ) {
                     }
                 break;
             case MG_KEY_PAGE_UP:  {
-                for( int o=0; o<offset; o++ ) {
-                    
-                    int layerOffset = 1;
-                    if( mPickedObjectLayer + 1 
-                        >= mCurrentObject.numSprites ) {
-                    
-                        layerOffset = 
-                            mCurrentObject.numSprites - 1 - mPickedObjectLayer;
-                        }
-                    if( mPickedObjectLayer < 
-                        mCurrentObject.numSprites - layerOffset ) {
-                
-
-                        // two indices being swapped
-                        int indexA = mPickedObjectLayer;
-                        int indexB = mPickedObjectLayer + layerOffset;
-                        
-                        LayerSwapRecord swap = { indexA, indexB };
-                        
-                        mObjectLayerSwaps.push_back( swap );
-                        
-
-                        int tempSprite = 
-                            mCurrentObject.sprites[mPickedObjectLayer + 
-                                                   layerOffset];
-                        doublePair tempPos = 
-                            mCurrentObject.spritePos[mPickedObjectLayer + 
-                                                     layerOffset];
-                        double tempRot = 
-                            mCurrentObject.spriteRot[mPickedObjectLayer + 
-                                                     layerOffset];
-                        char tempHFlip = 
-                            mCurrentObject.spriteHFlip[mPickedObjectLayer + 
-                                                       layerOffset];
-                
-                        FloatRGB tempColor = 
-                            mCurrentObject.spriteColor[mPickedObjectLayer + 
-                                                       layerOffset];
-
-                        double tempAgeStart = 
-                            mCurrentObject.spriteAgeStart[mPickedObjectLayer + 
-                                                          layerOffset];
-                        double tempAgeEnd = 
-                            mCurrentObject.spriteAgeEnd[mPickedObjectLayer + 
-                                                        layerOffset];
-                        int tempParent = 
-                            mCurrentObject.spriteParent[mPickedObjectLayer + 
-                                                        layerOffset];
-                    
-                        char tempInvisibleWhenHolding = 
-                            mCurrentObject.spriteInvisibleWhenHolding[
-                                mPickedObjectLayer + 
-                                layerOffset];
-
-                        int tempInvisibleWhenWorn = 
-                            mCurrentObject.spriteInvisibleWhenWorn[
-                                mPickedObjectLayer + 
-                                layerOffset];
-                        int tempInvisibleWhenContained = 
-                            mCurrentObject.spriteInvisibleWhenContained[
-                                mPickedObjectLayer + 
-                                layerOffset];
-                        int tempIgnoredWhenCalculatingCenterOffset = 
-                            mCurrentObject.spriteIgnoredWhenCalculatingCenterOffset[
-                                mPickedObjectLayer + 
-                                layerOffset];
-                        char tempBehindSlots = 
-                            mCurrentObject.spriteBehindSlots[
-                                mPickedObjectLayer + 
-                                layerOffset];
-                        char tempBehindPlayer = 
-                            mCurrentObject.spriteBehindPlayer[
-                                mPickedObjectLayer + 
-                                layerOffset];
-                        char tempAdditiveBlend = 
-                            mCurrentObject.spriteAdditiveBlend[
-                                mPickedObjectLayer + 
-                                layerOffset];
-
-                        char tempIsHead = 
-                            mCurrentObject.spriteIsHead[
-                                mPickedObjectLayer + 
-                                layerOffset];
-                        char tempIsBody = 
-                            mCurrentObject.spriteIsBody[
-                                mPickedObjectLayer + 
-                                layerOffset];
-                        char tempIsBackFoot = 
-                            mCurrentObject.spriteIsBackFoot[
-                                mPickedObjectLayer + 
-                                layerOffset];
-                        char tempIsFrontFoot = 
-                            mCurrentObject.spriteIsFrontFoot[
-                                mPickedObjectLayer + 
-                                layerOffset];
-
-                        char tempUseVanish = 
-                            mCurrentObject.spriteUseVanish[
-                                mPickedObjectLayer + 
-                                layerOffset];
-                        char tempUseAppear = 
-                            mCurrentObject.spriteUseAppear[
-                                mPickedObjectLayer + 
-                                layerOffset];
-
-
-                        mCurrentObject.sprites[mPickedObjectLayer + 
-                                               layerOffset]
-                            = mCurrentObject.sprites[mPickedObjectLayer];
-
-                        mCurrentObject.sprites[mPickedObjectLayer] = 
-                            tempSprite;
-                
-                        mCurrentObject.spritePos[mPickedObjectLayer + 
-                                                 layerOffset]
-                            = mCurrentObject.spritePos[mPickedObjectLayer];
-
-                        mCurrentObject.spritePos[mPickedObjectLayer] = tempPos;
-
-                        mCurrentObject.spriteRot[mPickedObjectLayer + 
-                                                 layerOffset]
-                            = mCurrentObject.spriteRot[mPickedObjectLayer];
-
-                        mCurrentObject.spriteRot[mPickedObjectLayer] = tempRot;
-
-                        mCurrentObject.spriteHFlip[mPickedObjectLayer 
-                                                   + layerOffset]
-                            = mCurrentObject.spriteHFlip[mPickedObjectLayer];
-                        
-                        mCurrentObject.spriteHFlip[mPickedObjectLayer] = 
-                            tempHFlip;
-
-                        mCurrentObject.spriteColor[mPickedObjectLayer 
-                                                   + layerOffset]
-                            = mCurrentObject.spriteColor[mPickedObjectLayer];
-                        
-                        mCurrentObject.spriteColor[mPickedObjectLayer] = 
-                            tempColor;
-
-
-                        mCurrentObject.spriteAgeStart[mPickedObjectLayer 
-                                                      + layerOffset]
-                            = mCurrentObject.spriteAgeStart[
-                                mPickedObjectLayer];
-                        
-                        mCurrentObject.spriteAgeStart[mPickedObjectLayer] = 
-                            tempAgeStart;
-
-                        mCurrentObject.spriteAgeEnd[mPickedObjectLayer 
-                                                    + layerOffset]
-                            = mCurrentObject.spriteAgeEnd[mPickedObjectLayer];
-                        mCurrentObject.spriteAgeEnd[mPickedObjectLayer] = 
-                            tempAgeEnd;
-                    
-                        mCurrentObject.spriteParent[mPickedObjectLayer 
-                                                    + layerOffset]
-                            = mCurrentObject.spriteParent[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteParent[mPickedObjectLayer] = 
-                            tempParent;
-
-
-                        mCurrentObject.spriteInvisibleWhenHolding[
-                            mPickedObjectLayer 
-                            + layerOffset]
-                            = mCurrentObject.spriteInvisibleWhenHolding[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteInvisibleWhenHolding[
-                            mPickedObjectLayer] = tempInvisibleWhenHolding;
-
-                        mCurrentObject.spriteInvisibleWhenWorn[
-                            mPickedObjectLayer 
-                            + layerOffset]
-                            = mCurrentObject.spriteInvisibleWhenWorn[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteInvisibleWhenWorn[
-                            mPickedObjectLayer] = tempInvisibleWhenWorn;
-
-                        mCurrentObject.spriteInvisibleWhenContained[
-                            mPickedObjectLayer 
-                            + layerOffset]
-                            = mCurrentObject.spriteInvisibleWhenContained[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteInvisibleWhenContained[
-                            mPickedObjectLayer] = tempInvisibleWhenContained;
-
-                        mCurrentObject.spriteIgnoredWhenCalculatingCenterOffset[
-                            mPickedObjectLayer 
-                            + layerOffset]
-                            = mCurrentObject.spriteIgnoredWhenCalculatingCenterOffset[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteIgnoredWhenCalculatingCenterOffset[
-                            mPickedObjectLayer] = tempIgnoredWhenCalculatingCenterOffset;
-
-                        mCurrentObject.spriteBehindSlots[
-                            mPickedObjectLayer 
-                            + layerOffset]
-                            = mCurrentObject.spriteBehindSlots[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteBehindSlots[
-                            mPickedObjectLayer] = tempBehindSlots;
-
-                        mCurrentObject.spriteBehindPlayer[
-                            mPickedObjectLayer 
-                            + layerOffset]
-                            = mCurrentObject.spriteBehindPlayer[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteBehindPlayer[
-                            mPickedObjectLayer] = tempBehindPlayer;
-
-
-                        mCurrentObject.spriteAdditiveBlend[
-                            mPickedObjectLayer 
-                            + layerOffset]
-                            = mCurrentObject.spriteAdditiveBlend[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteAdditiveBlend[
-                            mPickedObjectLayer] = tempAdditiveBlend;
-
-
-                        mCurrentObject.spriteIsHead[ mPickedObjectLayer 
-                                                 + layerOffset ] =
-                            mCurrentObject.spriteIsHead[mPickedObjectLayer];
-                        mCurrentObject.spriteIsHead[mPickedObjectLayer] = 
-                            tempIsHead;
-                
-                        mCurrentObject.spriteIsBody[ mPickedObjectLayer 
-                                                 + layerOffset ] =
-                            mCurrentObject.spriteIsBody[mPickedObjectLayer];
-                        mCurrentObject.spriteIsBody[mPickedObjectLayer] = 
-                            tempIsBody;
-                
-                        mCurrentObject.spriteIsBackFoot[ mPickedObjectLayer 
-                                                 + layerOffset ] =
-                            mCurrentObject.spriteIsBackFoot[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteIsBackFoot[mPickedObjectLayer] = 
-                            tempIsBackFoot;
-                
-                        mCurrentObject.spriteIsFrontFoot[ mPickedObjectLayer 
-                                                 + layerOffset ] =
-                            mCurrentObject.spriteIsFrontFoot[
-                                mPickedObjectLayer];
-                        mCurrentObject.spriteIsFrontFoot[mPickedObjectLayer] = 
-                            tempIsFrontFoot;
-                
-
-
-                        mCurrentObject.spriteUseVanish[ mPickedObjectLayer 
-                                                        + layerOffset ] =
-                            mCurrentObject.spriteUseVanish[mPickedObjectLayer];
-                        mCurrentObject.spriteUseVanish[mPickedObjectLayer] = 
-                            tempUseVanish;
-
-                        mCurrentObject.spriteUseAppear[ mPickedObjectLayer 
-                                                        + layerOffset ] =
-                            mCurrentObject.spriteUseAppear[mPickedObjectLayer];
-                        mCurrentObject.spriteUseAppear[mPickedObjectLayer] = 
-                            tempUseAppear;
-
-                    
-                        mPickedObjectLayer += layerOffset;
-                    
-                        // any children pointing to index A must now
-                        // point to B and vice-versa
-                        for( int i=0; i<mCurrentObject.numSprites; i++ ) {
-                            if( mCurrentObject.spriteParent[i] == indexA ) {
-                                mCurrentObject.spriteParent[i] = indexB;
-                                }
-                            else if( mCurrentObject.spriteParent[i] == 
-                                     indexB ) {
-                                
-                                mCurrentObject.spriteParent[i] = indexA;
-                                }
-                            }
-                        for( int i=0; i<mCurrentObject.numSlots; i++ ) {
-                            if( mCurrentObject.slotParent[i] == indexA ) {
-                                mCurrentObject.slotParent[i] = indexB;
-                                }
-                            else if( mCurrentObject.slotParent[i] == indexB ) {
-                                mCurrentObject.slotParent[i] = indexA;
-                                }
-                            }
-                        }
-                    }
+                moveSpriteLayerUp( offset )
                 break;
                 }
             case MG_KEY_PAGE_DOWN: {

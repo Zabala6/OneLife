@@ -369,7 +369,7 @@ class EditorObjectPage : public GamePage, public ActionListener {
         KeyLegend mKeyLegendC;
         KeyLegend mKeyLegendD;
 
-
+        void moveSpriteLayerUp( int inOffset );
         void moveSpriteLayerDown( int inOffset );
         
 
