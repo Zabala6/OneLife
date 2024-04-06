@@ -7080,10 +7080,10 @@ void EditorObjectPage::keyDown( unsigned char inASCII ) {
         mPrintRequested = true;
         mSavePrintOnly = true;
         }
-    else if ( inASCII == 'w' ) {
-        moveSpriteLayerUp( offset )
+    else if ( inASCII == 'w' && mPickedObjectLayer != -1) {
+        moveSpriteLayerUp( offset );
     }
-    else if ( inASCII == 's' ){
+    else if ( inASCII == 's' && mPickedObjectLayer != -1 ) {
         moveSpriteLayerDown( offset );
     }
     }
